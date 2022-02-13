@@ -108,21 +108,29 @@ public class Bot {
 
         // Belok hanya untuk menghindari obstacle, selebihnya mengikuti current lane
 
+
+
         // Menghindari obstacle
-        if (blocks.contains(Terrain.MUD) || nextBlocks.contains(Terrain.WALL)) {
-            if (hasPowerUp(PowerUps.LIZARD, myCar.powerups)) {
+        if (getNearestObstacle(blocks) != 0) {
+
+            //List<Object> landingBlock = blocks.subList(myCar.position.block + currentSpeed, myCar.position.block + currentSpeed + 1);
+            Object landingBlock = blocks.get(currentSpeed);
+            //boolean landingInObstacle = landingBlock.contains(Terrain.MUD) || landingBlock.contains(Terrain.WALL) || landingBlock.contains(Terrain.TWEET);
+            boolean landingInObstacle = landingBlock == Terrain.MUD || landingBlock == Terrain.WALL || landingBlock == Terrain.TWEET;
+
+            if (hasPowerUp(PowerUps.LIZARD, myCar.powerups) && !landingInObstacle) {
                 return LIZARD;
             }
-            if (nextBlocks.contains(Terrain.MUD) || nextBlocks.contains(Terrain.WALL)) {
-                if (myCar.position.lane == 1) {
+            if (currentSpeed >= getNearestObstacle(blocks)) {
+                if (myCar.position.lane == 4) {
                     return TURN_LEFT;
-                } else if (myCar.position.lane == 4) {
+                } else if (myCar.position.lane == 1) {
                     return TURN_RIGHT;
                 } else {
                     // blok di kanan current lane
-                    List<Object> blocksInRightSideLane = getBlocksInFront(myCar.position.lane - 1, myCar.position.block, gameState);
+                    List<Object> blocksInRightSideLane = getBlocksInFront(myCar.position.lane + 1, myCar.position.block, gameState);
                     //blok di kiri current lane
-                    List<Object> blocksInLeftSideLane = getBlocksInFront(myCar.position.lane + 1, myCar.position.block, gameState);
+                    List<Object> blocksInLeftSideLane = getBlocksInFront(myCar.position.lane - 1, myCar.position.block, gameState);
 
                     int obsAtXLeft = 0;
                     int obsAtXRight = 0;
@@ -197,7 +205,11 @@ public class Bot {
                 i ++;
             }
         }
-        return i + 1;
+        if (!found) {
+            return 0;
+        } else {
+            return i + 1;
+        }
     }
 
     /**
