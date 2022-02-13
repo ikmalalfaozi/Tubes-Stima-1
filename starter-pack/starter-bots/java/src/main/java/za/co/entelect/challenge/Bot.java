@@ -28,6 +28,7 @@ public class Bot {
     private final static Command EMP = new EmpCommand();
     private final static Command FIX = new FixCommand();
 
+
     private final static Command TURN_RIGHT = new ChangeLaneCommand(1);
     private final static Command TURN_LEFT = new ChangeLaneCommand(-1);
 
@@ -71,6 +72,10 @@ public class Bot {
 
         int nearestObstacle = getNearestObstacle(blocks);
 
+        if (hasPowerUp(PowerUps.BOOST, myCar.powerups) && nearestObstacle > 15) {
+            return BOOST;
+        }
+
         switch (currentSpeed) {
             case 0:
                 return ACCELERATE;
@@ -89,10 +94,6 @@ public class Bot {
             case 8:
                 if (nearestObstacle > 9) {
                     return ACCELERATE;
-                }
-            case 9:
-                if (nearestObstacle > 15 && hasPowerUp(PowerUps.BOOST, myCar.powerups)) {
-                    return BOOST;
                 }
         }
 
@@ -161,10 +162,6 @@ public class Bot {
         }
 
         // setelah coba menghindari obstacle, pakai powerups yg ada
-
-        if (hasPowerUp(PowerUps.BOOST, myCar.powerups) && nearestObstacle > 15) {
-            return BOOST;
-        }
 
         // ageresif
 
