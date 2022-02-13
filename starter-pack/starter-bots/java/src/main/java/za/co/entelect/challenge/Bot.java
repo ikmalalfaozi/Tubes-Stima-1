@@ -49,10 +49,11 @@ public class Bot {
 
     public Command run(GameState gameState) {
         Car myCar = gameState.player;
+        Car opponent = gameState.opponent;
+        int currentSpeed = myCar.speed;
 
         List<Object> blocks = getBlocksInFront(myCar.position.lane, myCar.position.block, gameState); // beberapa blok ke depan
-        List<Object> nextBlocks = blocks.subList(0,1); // mendapatkan satu blok ke depan (masih dalam bentuk list)
-
+        List<Object> nextBlocks = blocks.subList(0,1); // mendapatkan satu blok ke depan (masih dalam bentuk list
 
         /* if (myCar.damage >= 5) {
             return new FixCommand();
@@ -63,13 +64,41 @@ public class Bot {
         } */
 
         //Fix first if too damaged to move
+
         if(myCar.damage == 5) {
             return FIX;
         }
 
-        if (myCar.speed <= 3) {
-            return ACCELERATE;
+        int nearestObstacle = getNearestObstacle(blocks);
+
+        switch (currentSpeed) {
+            case 0:
+                return ACCELERATE;
+            case 3:
+                if (nearestObstacle > 5) {
+                    return ACCELERATE;
+                }
+            case 5:
+                if (nearestObstacle > 6) {
+                    return ACCELERATE;
+                }
+            case 6:
+                if (nearestObstacle > 8) {
+                    return ACCELERATE;
+                }
+            case 8:
+                if (nearestObstacle > 9) {
+                    return ACCELERATE;
+                }
+            case 9:
+                if (nearestObstacle > 15 && hasPowerUp(PowerUps.BOOST, myCar.powerups)) {
+                    return BOOST;
+                }
         }
+
+//        if (myCar.speed <= 3) {
+//            return ACCELERATE;
+//        }
 
         //Basic fix logic
         if(myCar.damage >= 5) {
@@ -131,20 +160,47 @@ public class Bot {
             }
         }
 
-        if (hasPowerUp(PowerUps.BOOST, myCar.powerups)) {
+        // setelah coba menghindari obstacle, pakai powerups yg ada
+
+        if (hasPowerUp(PowerUps.BOOST, myCar.powerups) && nearestObstacle > 15) {
             return BOOST;
         }
 
-        if (myCar.speed == maxSpeed) {
-            if (hasPowerUp(PowerUps.OIL, myCar.powerups)) {
+        // ageresif
+
+        int opponentLane = opponent.position.lane;
+        int opponentBlock = opponent.position.block;
+        Command TWEET = new TweetCommand(opponentLane, opponentBlock + 1);
+
+        if (hasPowerUp(PowerUps.TWEET, myCar.powerups) && myCar.position.lane != opponent.position.lane) {
+            return TWEET;
+        }
+
+        // oil dan emp
+        if (myCar.speed == maxSpeed && myCar.position.lane == opponent.position.lane) {
+            if (hasPowerUp(PowerUps.OIL, myCar.powerups) && myCar.position.block > opponent.position.block) {
                 return OIL;
             }
-            if (hasPowerUp(PowerUps.EMP, myCar.powerups)) {
+            if (hasPowerUp(PowerUps.EMP, myCar.powerups) && myCar.position.block < opponent.position.block) {
                 return EMP;
             }
         }
 
+        // default ACCELERATE
         return ACCELERATE;
+    }
+
+    private int getNearestObstacle(List<Object> blocks) {
+        int i = 0;
+        boolean found = false;
+        while (i < blocks.size() && !found) {
+            if (blocks.contains(Terrain.MUD) || blocks.contains(Terrain.WALL)) {
+                found = true;
+            } else {
+                i ++;
+            }
+        }
+        return i + 1;
     }
 
     /**
