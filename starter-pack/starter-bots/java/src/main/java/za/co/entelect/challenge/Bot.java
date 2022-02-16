@@ -56,15 +56,7 @@ public class Bot {
         List<Object> blocks = getBlocksInFront(myCar.position.lane, myCar.position.block, gameState); // beberapa blok ke depan
         List<Object> nextBlocks = blocks.subList(0,1); // mendapatkan satu blok ke depan (masih dalam bentuk list
 
-        /* if (myCar.damage >= 5) {
-            return new FixCommand();
-        }
-        if (blocks.contains(Terrain.MUD)) {
-            int i = random.nextInt(directionList.size());
-            return new ChangeLaneCommand(directionList.get(i));
-        } */
-
-        //Fix first if too damaged to move
+        // Fix first if too damaged to move
 
         if(myCar.damage == 5) {
             return FIX;
@@ -76,6 +68,8 @@ public class Bot {
             return BOOST;
         }
 
+        /* sebelum speed dinaikkan ke state selanjutnya, akan dicek obstacle terdekat
+        pada lane saat itu agar tidak mengenai obstacle */
         switch (currentSpeed) {
             case 0:
                 return ACCELERATE;
@@ -97,18 +91,12 @@ public class Bot {
                 }
         }
 
-//        if (myCar.speed <= 3) {
-//            return ACCELERATE;
-//        }
-
-        //Basic fix logic
+        // Basic fix logic
         if(myCar.damage >= 5) {
             return FIX;
         }
 
         // Belok hanya untuk menghindari obstacle, selebihnya mengikuti current lane
-
-
 
         // Menghindari obstacle
         if (getNearestObstacle(blocks) != 0) {
@@ -119,17 +107,19 @@ public class Bot {
             boolean landingInObstacle = landingBlock == Terrain.MUD || landingBlock == Terrain.WALL || landingBlock == Terrain.TWEET;
 
             if (hasPowerUp(PowerUps.LIZARD, myCar.powerups) && !landingInObstacle) {
+                // cek agar saat landing setelah menggunakan lizard tdk mengenai obstacle
                 return LIZARD;
             }
-            if (currentSpeed >= getNearestObstacle(blocks)) {
+            if (currentSpeed >= getNearestObstacle(blocks)) { // jika akan menabrak obstacle
                 if (myCar.position.lane == 4) {
-                    return TURN_LEFT;
+                    return TURN_LEFT; // belok kiri jika mobil di lane paling kanan
                 } else if (myCar.position.lane == 1) {
-                    return TURN_RIGHT;
-                } else {
+                    return TURN_RIGHT; // belok kanan jika mobil di lane paling kiri
+                } else { // jika di 2 lane tengah (lane 2 dan 3)
+
                     // blok di kanan current lane
                     List<Object> blocksInRightSideLane = getBlocksInFront(myCar.position.lane + 1, myCar.position.block, gameState);
-                    //blok di kiri current lane
+                    // blok di kiri current lane
                     List<Object> blocksInLeftSideLane = getBlocksInFront(myCar.position.lane - 1, myCar.position.block, gameState);
 
                     int obsAtXLeft = 0;
@@ -140,17 +130,21 @@ public class Bot {
                     boolean foundRight = false;
 
                     // menghindari dgn belok ke lane yang memiliki powerups terdekat
+
+                    // cek obstacle terdekat di lane kiri
                     while (i < blocksInLeftSideLane.size() && !foundLeft) {
                         if (blocksInLeftSideLane.contains(Terrain.MUD) || blocksInLeftSideLane.contains(Terrain.WALL)) {
-                            obsAtXLeft = i;
+                            obsAtXLeft = i; // obstacle ditemukan di blok ke-i
                             foundLeft = true;
                         } else {
                             i ++;
                         }
                     }
+
+                    // cek obstacle terdekat di lane kanan
                     while (j < blocksInRightSideLane.size() && !foundRight) {
                         if (blocksInRightSideLane.contains(Terrain.MUD) || blocksInLeftSideLane.contains(Terrain.WALL)) {
-                            obsAtXRight = j;
+                            obsAtXRight = j; // obstacle ditemukan di blok ke-i
                             foundRight = true;
                         } else {
                             j ++;
@@ -160,9 +154,9 @@ public class Bot {
                         return TURN_RIGHT;
                     } else if (foundLeft == false) {
                         return TURN_LEFT;
-                    } else if (obsAtXLeft <= obsAtXRight) {
+                    } else if (obsAtXLeft <= obsAtXRight) { // obstacle di lane kanan lebih jauh
                         return TURN_RIGHT;
-                    } else if (obsAtXLeft > obsAtXRight) {
+                    } else if (obsAtXLeft > obsAtXRight) { // obstacle di lane kiri lebih jauh
                         return TURN_LEFT;
                     }
                 }

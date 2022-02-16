@@ -4,44 +4,37 @@
   "player":{
     "id":1,
     "position":{
-      "y":4,
-      "x":1300
+      "y":3,
+      "x":1187
     },
-    "speed":3,
-    "state":"ACCELERATING",
+    "speed":0,
+    "state":"HIT_WALL",
     "statesThatOccurredThisRound":[
-      "ACCELERATING"
+      "TURNING_LEFT",
+      "HIT_WALL"
     ],
     "powerups":[
       "BOOST",
-      "BOOST",
-      "BOOST",
-      "EMP",
-      "BOOST",
-      "EMP",
-      "BOOST",
-      "EMP",
-      "BOOST",
       "OIL",
       "BOOST",
-      "BOOST",
-      "BOOST",
+      "OIL",
+      "OIL",
+      "OIL",
+      "OIL",
       "EMP",
       "OIL",
-      "OIL",
-      "BOOST",
-      "OIL",
-      "BOOST",
-      "OIL",
-      "OIL",
-      "BOOST",
       "EMP",
+      "EMP",
+      "OIL",
+      "BOOST",
+      "OIL",
+      "OIL",
+      "OIL",
+      "BOOST",
       "BOOST",
       "OIL",
       "EMP",
-      "BOOST",
       "OIL",
-      "EMP",
       "BOOST",
       "BOOST",
       "EMP",
@@ -51,14 +44,14 @@
     ],
     "boosting":false,
     "boostCounter":0,
-    "damage":4,
-    "score":284
+    "damage":5,
+    "score":201
   },
   "opponent":{
     "id":2,
     "position":{
       "y":4,
-      "x":863
+      "x":822
     },
     "speed":3
   },
@@ -67,7 +60,7 @@
       {
         "position":{
           "y":1,
-          "x":1295
+          "x":1182
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -76,7 +69,7 @@
       {
         "position":{
           "y":1,
-          "x":1296
+          "x":1183
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -85,7 +78,7 @@
       {
         "position":{
           "y":1,
-          "x":1297
+          "x":1184
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -94,7 +87,7 @@
       {
         "position":{
           "y":1,
-          "x":1298
+          "x":1185
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -103,7 +96,7 @@
       {
         "position":{
           "y":1,
-          "x":1299
+          "x":1186
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -112,7 +105,7 @@
       {
         "position":{
           "y":1,
-          "x":1300
+          "x":1187
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -121,7 +114,7 @@
       {
         "position":{
           "y":1,
-          "x":1301
+          "x":1188
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -130,7 +123,7 @@
       {
         "position":{
           "y":1,
-          "x":1302
+          "x":1189
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -139,7 +132,7 @@
       {
         "position":{
           "y":1,
-          "x":1303
+          "x":1190
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -148,7 +141,7 @@
       {
         "position":{
           "y":1,
-          "x":1304
+          "x":1191
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -157,7 +150,7 @@
       {
         "position":{
           "y":1,
-          "x":1305
+          "x":1192
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -166,7 +159,7 @@
       {
         "position":{
           "y":1,
-          "x":1306
+          "x":1193
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -175,7 +168,7 @@
       {
         "position":{
           "y":1,
-          "x":1307
+          "x":1194
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -184,7 +177,7 @@
       {
         "position":{
           "y":1,
-          "x":1308
+          "x":1195
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -193,7 +186,7 @@
       {
         "position":{
           "y":1,
-          "x":1309
+          "x":1196
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -202,7 +195,7 @@
       {
         "position":{
           "y":1,
-          "x":1310
+          "x":1197
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -211,7 +204,7 @@
       {
         "position":{
           "y":1,
-          "x":1311
+          "x":1198
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -220,7 +213,7 @@
       {
         "position":{
           "y":1,
-          "x":1312
+          "x":1199
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -229,7 +222,7 @@
       {
         "position":{
           "y":1,
-          "x":1313
+          "x":1200
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -238,7 +231,7 @@
       {
         "position":{
           "y":1,
-          "x":1314
+          "x":1201
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -247,7 +240,7 @@
       {
         "position":{
           "y":1,
-          "x":1315
+          "x":1202
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -256,7 +249,7 @@
       {
         "position":{
           "y":1,
-          "x":1316
+          "x":1203
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -265,16 +258,7 @@
       {
         "position":{
           "y":1,
-          "x":1317
-        },
-        "surfaceObject":5,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":1,
-          "x":1318
+          "x":1204
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -283,7 +267,7 @@
       {
         "position":{
           "y":1,
-          "x":1319
+          "x":1205
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -292,7 +276,16 @@
       {
         "position":{
           "y":1,
-          "x":1320
+          "x":1206
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":1,
+          "x":1207
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -303,7 +296,7 @@
       {
         "position":{
           "y":2,
-          "x":1295
+          "x":1182
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -312,7 +305,7 @@
       {
         "position":{
           "y":2,
-          "x":1296
+          "x":1183
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -321,7 +314,7 @@
       {
         "position":{
           "y":2,
-          "x":1297
+          "x":1184
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -330,7 +323,7 @@
       {
         "position":{
           "y":2,
-          "x":1298
+          "x":1185
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -339,7 +332,7 @@
       {
         "position":{
           "y":2,
-          "x":1299
+          "x":1186
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -348,7 +341,7 @@
       {
         "position":{
           "y":2,
-          "x":1300
+          "x":1187
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -357,7 +350,7 @@
       {
         "position":{
           "y":2,
-          "x":1301
+          "x":1188
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -366,16 +359,7 @@
       {
         "position":{
           "y":2,
-          "x":1302
-        },
-        "surfaceObject":7,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":2,
-          "x":1303
+          "x":1189
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -384,7 +368,7 @@
       {
         "position":{
           "y":2,
-          "x":1304
+          "x":1190
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -393,7 +377,7 @@
       {
         "position":{
           "y":2,
-          "x":1305
+          "x":1191
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -402,7 +386,234 @@
       {
         "position":{
           "y":2,
-          "x":1306
+          "x":1192
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":2,
+          "x":1193
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":2,
+          "x":1194
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":2,
+          "x":1195
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":2,
+          "x":1196
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":2,
+          "x":1197
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":2,
+          "x":1198
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":2,
+          "x":1199
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":2,
+          "x":1200
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":2,
+          "x":1201
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":2,
+          "x":1202
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":2,
+          "x":1203
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":2,
+          "x":1204
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":2,
+          "x":1205
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":2,
+          "x":1206
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":2,
+          "x":1207
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      }
+    ],
+    [
+      {
+        "position":{
+          "y":3,
+          "x":1182
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":3,
+          "x":1183
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":3,
+          "x":1184
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":3,
+          "x":1185
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":3,
+          "x":1186
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":3,
+          "x":1187
+        },
+        "surfaceObject":6,
+        "occupiedByPlayerId":1,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":3,
+          "x":1188
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":3,
+          "x":1189
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":3,
+          "x":1190
+        },
+        "surfaceObject":0,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":3,
+          "x":1191
         },
         "surfaceObject":6,
         "occupiedByPlayerId":0,
@@ -410,136 +621,8 @@
       },
       {
         "position":{
-          "y":2,
-          "x":1307
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":2,
-          "x":1308
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":2,
-          "x":1309
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":2,
-          "x":1310
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":2,
-          "x":1311
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":2,
-          "x":1312
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":2,
-          "x":1313
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":2,
-          "x":1314
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":2,
-          "x":1315
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":2,
-          "x":1316
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":2,
-          "x":1317
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":2,
-          "x":1318
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":2,
-          "x":1319
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":2,
-          "x":1320
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      }
-    ],
-    [
-      {
-        "position":{
           "y":3,
-          "x":1295
+          "x":1192
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -548,7 +631,7 @@
       {
         "position":{
           "y":3,
-          "x":1296
+          "x":1193
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -557,7 +640,7 @@
       {
         "position":{
           "y":3,
-          "x":1297
+          "x":1194
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -566,7 +649,7 @@
       {
         "position":{
           "y":3,
-          "x":1298
+          "x":1195
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -575,16 +658,7 @@
       {
         "position":{
           "y":3,
-          "x":1299
-        },
-        "surfaceObject":7,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":3,
-          "x":1300
+          "x":1196
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -593,7 +667,7 @@
       {
         "position":{
           "y":3,
-          "x":1301
+          "x":1197
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -602,7 +676,7 @@
       {
         "position":{
           "y":3,
-          "x":1302
+          "x":1198
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -611,7 +685,7 @@
       {
         "position":{
           "y":3,
-          "x":1303
+          "x":1199
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -620,7 +694,7 @@
       {
         "position":{
           "y":3,
-          "x":1304
+          "x":1200
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -629,7 +703,16 @@
       {
         "position":{
           "y":3,
-          "x":1305
+          "x":1201
+        },
+        "surfaceObject":1,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":3,
+          "x":1202
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -638,7 +721,7 @@
       {
         "position":{
           "y":3,
-          "x":1306
+          "x":1203
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -647,7 +730,7 @@
       {
         "position":{
           "y":3,
-          "x":1307
+          "x":1204
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -656,7 +739,7 @@
       {
         "position":{
           "y":3,
-          "x":1308
+          "x":1205
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -665,7 +748,7 @@
       {
         "position":{
           "y":3,
-          "x":1309
+          "x":1206
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -674,99 +757,9 @@
       {
         "position":{
           "y":3,
-          "x":1310
+          "x":1207
         },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":3,
-          "x":1311
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":3,
-          "x":1312
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":3,
-          "x":1313
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":3,
-          "x":1314
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":3,
-          "x":1315
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":3,
-          "x":1316
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":3,
-          "x":1317
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":3,
-          "x":1318
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":3,
-          "x":1319
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":3,
-          "x":1320
-        },
-        "surfaceObject":0,
+        "surfaceObject":1,
         "occupiedByPlayerId":0,
         "isOccupiedByCyberTruck":false
       }
@@ -775,7 +768,16 @@
       {
         "position":{
           "y":4,
-          "x":1295
+          "x":1182
+        },
+        "surfaceObject":6,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":4,
+          "x":1183
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -784,7 +786,7 @@
       {
         "position":{
           "y":4,
-          "x":1296
+          "x":1184
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -793,7 +795,7 @@
       {
         "position":{
           "y":4,
-          "x":1297
+          "x":1185
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -802,7 +804,7 @@
       {
         "position":{
           "y":4,
-          "x":1298
+          "x":1186
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -811,7 +813,7 @@
       {
         "position":{
           "y":4,
-          "x":1299
+          "x":1187
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -820,16 +822,7 @@
       {
         "position":{
           "y":4,
-          "x":1300
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":1,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":4,
-          "x":1301
+          "x":1188
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -838,7 +831,7 @@
       {
         "position":{
           "y":4,
-          "x":1302
+          "x":1189
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -847,7 +840,7 @@
       {
         "position":{
           "y":4,
-          "x":1303
+          "x":1190
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -856,7 +849,7 @@
       {
         "position":{
           "y":4,
-          "x":1304
+          "x":1191
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -865,7 +858,16 @@
       {
         "position":{
           "y":4,
-          "x":1305
+          "x":1192
+        },
+        "surfaceObject":1,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":4,
+          "x":1193
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -874,7 +876,7 @@
       {
         "position":{
           "y":4,
-          "x":1306
+          "x":1194
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -883,7 +885,7 @@
       {
         "position":{
           "y":4,
-          "x":1307
+          "x":1195
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -892,7 +894,7 @@
       {
         "position":{
           "y":4,
-          "x":1308
+          "x":1196
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -901,7 +903,7 @@
       {
         "position":{
           "y":4,
-          "x":1309
+          "x":1197
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -910,7 +912,7 @@
       {
         "position":{
           "y":4,
-          "x":1310
+          "x":1198
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -919,7 +921,7 @@
       {
         "position":{
           "y":4,
-          "x":1311
+          "x":1199
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -928,7 +930,7 @@
       {
         "position":{
           "y":4,
-          "x":1312
+          "x":1200
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -937,7 +939,16 @@
       {
         "position":{
           "y":4,
-          "x":1313
+          "x":1201
+        },
+        "surfaceObject":1,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":4,
+          "x":1202
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -946,7 +957,16 @@
       {
         "position":{
           "y":4,
-          "x":1314
+          "x":1203
+        },
+        "surfaceObject":5,
+        "occupiedByPlayerId":0,
+        "isOccupiedByCyberTruck":false
+      },
+      {
+        "position":{
+          "y":4,
+          "x":1204
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -955,7 +975,7 @@
       {
         "position":{
           "y":4,
-          "x":1315
+          "x":1205
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
@@ -964,43 +984,16 @@
       {
         "position":{
           "y":4,
-          "x":1316
+          "x":1206
         },
-        "surfaceObject":0,
+        "surfaceObject":1,
         "occupiedByPlayerId":0,
         "isOccupiedByCyberTruck":false
       },
       {
         "position":{
           "y":4,
-          "x":1317
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":4,
-          "x":1318
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":4,
-          "x":1319
-        },
-        "surfaceObject":0,
-        "occupiedByPlayerId":0,
-        "isOccupiedByCyberTruck":false
-      },
-      {
-        "position":{
-          "y":4,
-          "x":1320
+          "x":1207
         },
         "surfaceObject":0,
         "occupiedByPlayerId":0,
