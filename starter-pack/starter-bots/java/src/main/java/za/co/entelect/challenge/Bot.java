@@ -165,22 +165,26 @@ public class Bot {
 
         // setelah coba menghindari obstacle, pakai powerups yg ada
 
-        // ageresif
+        // ageresif (penggunaan powerups untuk menyarang lawan)
 
         int opponentLane = opponent.position.lane;
         int opponentBlock = opponent.position.block;
         Command TWEET = new TweetCommand(opponentLane, opponentBlock + 1);
 
+        // tweet
         if (hasPowerUp(PowerUps.TWEET, myCar.powerups) && myCar.position.lane != opponent.position.lane) {
+            // cek agar cybertruck tdk di-spawn di lane saat ini
             return TWEET;
         }
 
         // oil dan emp
-        if (myCar.speed == maxSpeed && myCar.position.lane == opponent.position.lane) {
+        if (myCar.position.lane == opponent.position.lane) { // jika satu lane dengan lawan
             if (hasPowerUp(PowerUps.OIL, myCar.powerups) && myCar.position.block > opponent.position.block) {
+                // jika posisi mobil lebih jauh dari lawan
                 return OIL;
             }
             if (hasPowerUp(PowerUps.EMP, myCar.powerups) && myCar.position.block < opponent.position.block) {
+                // jika posisi lawan lebih jauh
                 return EMP;
             }
         }
