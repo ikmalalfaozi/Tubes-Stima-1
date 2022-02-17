@@ -133,7 +133,7 @@ public class Bot {
 
                     // cek obstacle terdekat di lane kiri
                     while (i < blocksInLeftSideLane.size() && !foundLeft) {
-                        if (blocksInLeftSideLane.contains(Terrain.MUD) || blocksInLeftSideLane.contains(Terrain.WALL)) {
+                        if (blocksInLeftSideLane.contains(Terrain.MUD) || blocksInLeftSideLane.contains(Terrain.WALL) || blocksInLeftSideLane.contains(Terrain.TWEET)) {
                             obsAtXLeft = i; // obstacle ditemukan di blok ke-i
                             foundLeft = true;
                         } else {
@@ -143,7 +143,7 @@ public class Bot {
 
                     // cek obstacle terdekat di lane kanan
                     while (j < blocksInRightSideLane.size() && !foundRight) {
-                        if (blocksInRightSideLane.contains(Terrain.MUD) || blocksInLeftSideLane.contains(Terrain.WALL)) {
+                        if (blocksInRightSideLane.contains(Terrain.MUD) || blocksInRightSideLane.contains(Terrain.WALL) || blocksInRightSideLane.contains(Terrain.TWEET)) {
                             obsAtXRight = j; // obstacle ditemukan di blok ke-i
                             foundRight = true;
                         } else {
@@ -197,7 +197,7 @@ public class Bot {
         int i = 0;
         boolean found = false;
         while (i < blocks.size() && !found) {
-            if (blocks.contains(Terrain.MUD) || blocks.contains(Terrain.WALL)) {
+            if (blocks.contains(Terrain.MUD) || blocks.contains(Terrain.WALL) || blocks.contains(Terrain.TWEET)) {
                 found = true;
             } else {
                 i ++;
