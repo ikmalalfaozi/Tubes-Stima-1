@@ -13,13 +13,12 @@ import java.security.SecureRandom;
 
 public class Bot {
 
-    private static final int maxSpeed = 9;
     private List<Command> directionList = new ArrayList<>();
 
     private final Random random;
-    //private GameState gameState;
-    //private Car opponent;
-    //private Car myCar;
+    private GameState gameState;
+    private Car opponent;
+    private Car myCar;
 
     private final static Command ACCELERATE = new AccelerateCommand();
     private final static Command LIZARD = new LizardCommand();
@@ -32,10 +31,13 @@ public class Bot {
     private final static Command TURN_RIGHT = new ChangeLaneCommand(1);
     private final static Command TURN_LEFT = new ChangeLaneCommand(-1);
 
-    public Bot() {
+    public Bot(GameState gameState) {
         this.random = new SecureRandom();
         directionList.add(TURN_RIGHT);
         directionList.add(TURN_LEFT);
+        this.gameState = gameState;
+        this.myCar = gameState.player;
+        this.opponent = gameState.opponent;
     }
 
     /* public Bot(Random random, GameState gameState) {
@@ -48,23 +50,30 @@ public class Bot {
         directionList.add(1);
     } */
 
-    public Command run(GameState gameState) {
-        Car myCar = gameState.player;
-        Car opponent = gameState.opponent;
+    public Command run() {
         int currentSpeed = myCar.speed;
 
         List<Object> blocks = getBlocksInFront(myCar.position.lane, myCar.position.block, gameState); // beberapa blok ke depan
         List<Object> nextBlocks = blocks.subList(0,1); // mendapatkan satu blok ke depan (masih dalam bentuk list
 
-        // Fix first if too damaged to move
+        // Cek cyber truck
+        int i = 0;
+        boolean found = false;
+        while(i < gameState.lanes.size() && !found){
+            if(gameState.lane)
+        }
 
-        if(myCar.damage == 5) {
+        // Fix first if too damaged to mov
+        if(myCar.damage >= 3) {
             return FIX;
         }
 
         int nearestObstacle = getNearestObstacle(blocks);
 
-        if (hasPowerUp(PowerUps.BOOST, myCar.powerups) && nearestObstacle > 15) {
+        if (hasPowerUp(PowerUps.BOOST, myCar.powerups) && (nearestObstacle > 15 || nearestObstacle == 0)) {
+            if (myCar.damage != 0){
+                return FIX;
+            }
             return BOOST;
         }
 
@@ -74,35 +83,36 @@ public class Bot {
             case 0:
                 return ACCELERATE;
             case 3:
-                if (nearestObstacle > 5) {
+                if (nearestObstacle > 5 || nearestObstacle == 0) {
                     return ACCELERATE;
                 }
             case 5:
-                if (nearestObstacle > 6) {
+                if (nearestObstacle > 6 || nearestObstacle == 0) {
                     return ACCELERATE;
                 }
             case 6:
-                if (nearestObstacle > 8) {
+                if (nearestObstacle > 8 || nearestObstacle == 0) {
                     return ACCELERATE;
                 }
             case 8:
-                if (nearestObstacle > 9) {
+                if (nearestObstacle > 9 || nearestObstacle == 0) {
                     return ACCELERATE;
                 }
         }
 
-        // Basic fix logic
-        if(myCar.damage >= 5) {
-            return FIX;
-        }
 
         // Belok hanya untuk menghindari obstacle, selebihnya mengikuti current lane
 
         // Menghindari obstacle
         if (getNearestObstacle(blocks) != 0) {
-
+            Object landingBlock;
             //List<Object> landingBlock = blocks.subList(myCar.position.block + currentSpeed, myCar.position.block + currentSpeed + 1);
-            Object landingBlock = blocks.get(currentSpeed);
+            if(currentSpeed < blocks.size()){
+                landingBlock = blocks.get(currentSpeed);
+            } else {
+                landingBlock = Terrain.EMPTY;
+            }
+
             //boolean landingInObstacle = landingBlock.contains(Terrain.MUD) || landingBlock.contains(Terrain.WALL) || landingBlock.contains(Terrain.TWEET);
             boolean landingInObstacle = landingBlock == Terrain.MUD || landingBlock == Terrain.WALL;
 
@@ -110,53 +120,45 @@ public class Bot {
                 // cek agar saat landing setelah menggunakan lizard tdk mengenai obstacle
                 return LIZARD;
             }
+
             if (currentSpeed >= getNearestObstacle(blocks)) { // jika akan menabrak obstacle
                 if (myCar.position.lane == 4) {
+                    // blok di kiri current lane
+                    List<Object> blocksInLeftSideLane = getBlocksInFront(myCar.position.lane - 1, myCar.position.block, gameState);
+
+                    if (getNearestObstacle(blocks) >= getNearestObstacle(blocksInLeftSideLane) && (getNearestObstacle(blocksInLeftSideLane) != 0)){
+                        return ACCELERATE;
+                    }
                     return TURN_LEFT; // belok kiri jika mobil di lane paling kanan
                 } else if (myCar.position.lane == 1) {
+                    // blok di kanan current lane
+                    List<Object> blocksInRightSideLane = getBlocksInFront(myCar.position.lane + 1, myCar.position.block, gameState);
+
+                    if (getNearestObstacle(blocks) >= getNearestObstacle(blocksInRightSideLane) && (getNearestObstacle(blocksInRightSideLane) != 0)){
+                        return ACCELERATE;
+                    }
                     return TURN_RIGHT; // belok kanan jika mobil di lane paling kiri
                 } else { // jika di 2 lane tengah (lane 2 dan 3)
-
                     // blok di kanan current lane
                     List<Object> blocksInRightSideLane = getBlocksInFront(myCar.position.lane + 1, myCar.position.block, gameState);
                     // blok di kiri current lane
                     List<Object> blocksInLeftSideLane = getBlocksInFront(myCar.position.lane - 1, myCar.position.block, gameState);
 
-                    int obsAtXLeft = 0;
-                    int obsAtXRight = 0;
-                    int i = 0;
-                    int j = 0;
-                    boolean foundLeft = false;
-                    boolean foundRight = false;
-
-                    // menghindari dgn belok ke lane yang memiliki powerups terdekat
+                    // menghindari dgn belok ke lane yang memiliki obstaclel terjauh
 
                     // cek obstacle terdekat di lane kiri
-                    while (i < blocksInLeftSideLane.size() && !foundLeft) {
-                        if (blocksInLeftSideLane.contains(Terrain.MUD) || blocksInLeftSideLane.contains(Terrain.WALL)) {
-                            obsAtXLeft = i; // obstacle ditemukan di blok ke-i
-                            foundLeft = true;
-                        } else {
-                            i ++;
-                        }
-                    }
+                    int left = getNearestObstacle(blocksInLeftSideLane);
 
                     // cek obstacle terdekat di lane kanan
-                    while (j < blocksInRightSideLane.size() && !foundRight) {
-                        if (blocksInRightSideLane.contains(Terrain.MUD) || blocksInRightSideLane.contains(Terrain.WALL)) {
-                            obsAtXRight = j; // obstacle ditemukan di blok ke-i
-                            foundRight = true;
-                        } else {
-                            j ++;
-                        }
-                    }
-                    if (foundRight == false) {
+                    int right = getNearestObstacle(blocksInRightSideLane);
+
+                    if (right == 0) {
                         return TURN_RIGHT;
-                    } else if (foundLeft == false) {
+                    } else if (left == 0) {
                         return TURN_LEFT;
-                    } else if (obsAtXLeft <= obsAtXRight) { // obstacle di lane kanan lebih jauh
+                    } else if (left <= right) { // obstacle di lane kanan lebih jauh
                         return TURN_RIGHT;
-                    } else if (obsAtXLeft > obsAtXRight) { // obstacle di lane kiri lebih jauh
+                    } else { // obstacle di lane kiri lebih jauh
                         return TURN_LEFT;
                     }
                 }
@@ -169,7 +171,7 @@ public class Bot {
 
         int opponentLane = opponent.position.lane;
         int opponentBlock = opponent.position.block;
-        Command TWEET = new TweetCommand(opponentLane, opponentBlock + 1);
+        Command TWEET = new TweetCommand(opponentLane, opponentBlock + opponent.speed + 4);
 
         // tweet
         if (hasPowerUp(PowerUps.TWEET, myCar.powerups) && myCar.position.lane != opponent.position.lane) {
@@ -197,7 +199,7 @@ public class Bot {
         int i = 0;
         boolean found = false;
         while (i < blocks.size() && !found) {
-            if (blocks.contains(Terrain.MUD) || blocks.contains(Terrain.WALL)) {
+            if (blocks.get(i) == Terrain.MUD || blocks.get(i) == Terrain.WALL) {
                 found = true;
             } else {
                 i ++;
@@ -220,7 +222,7 @@ public class Bot {
         int startBlock = map.get(0)[0].position.block;
 
         Lane[] laneList = map.get(lane - 1);
-        for (int i = max(block - startBlock, 0); i <= block - startBlock + Bot.maxSpeed; i++) {
+        for (int i = max(block - startBlock, 0); i <= block - startBlock + 20; i++) {
             if (laneList[i] == null || laneList[i].terrain == Terrain.FINISH) {
                 break;
             }
