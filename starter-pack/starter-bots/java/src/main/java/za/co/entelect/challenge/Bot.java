@@ -36,6 +36,7 @@ public class Bot {
         directionList.add(TURN_RIGHT);
         directionList.add(TURN_LEFT);
         this.gameState = gameState;
+        List<Lane[]> map = gameState.lanes;
         this.myCar = gameState.player;
         this.opponent = gameState.opponent;
     }
@@ -55,13 +56,6 @@ public class Bot {
 
         List<Object> blocks = getBlocksInFront(myCar.position.lane, myCar.position.block, gameState); // beberapa blok ke depan
         List<Object> nextBlocks = blocks.subList(0,1); // mendapatkan satu blok ke depan (masih dalam bentuk list
-
-        // Cek cyber truck
-        int i = 0;
-        boolean found = false;
-        while(i < gameState.lanes.size() && !found){
-            if(gameState.lane)
-        }
 
         // Fix first if too damaged to mov
         if(myCar.damage >= 3) {
@@ -214,7 +208,7 @@ public class Bot {
 
     /**
      * Returns map of blocks and the objects in the for the current lanes, returns the amount of blocks that can be
-     * traversed at max speed.
+     * traversed up to 20 blocks.
      **/
     private List<Object> getBlocksInFront(int lane, int block, GameState gameState) {
         List<Lane[]> map = gameState.lanes;
@@ -242,4 +236,23 @@ public class Bot {
         return false;
     }
 
+    private int cyberTruckInLane() {
+        // cek cyber truck ada pada lane berapa
+        int i = 0;
+        boolean found = false;
+        List<Lane[]> map = gameState.lanes;
+        Lane[] laneList = map.get(myCar.position.lane - 1);
+        while (i < map.size() && !found){
+            if (laneList[i].isOccupiedByCyberTruck == true) {
+                found = true;
+            } else {
+                i ++;
+            }
+        }
+        if (found) {
+            return i;
+        } else { // jika tidak ditemukan, return -1
+            return -1;
+        }
+    }
 }
