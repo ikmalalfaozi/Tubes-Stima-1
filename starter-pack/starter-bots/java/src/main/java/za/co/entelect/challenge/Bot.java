@@ -6,16 +6,11 @@ import za.co.entelect.challenge.enums.PowerUps;
 import za.co.entelect.challenge.enums.Terrain;
 
 import java.util.*;
-
 import static java.lang.Math.max;
 
-import java.security.SecureRandom;
-
 public class Bot {
-
     private List<Command> directionList = new ArrayList<>();
 
-    private final Random random;
     private GameState gameState;
     private Car opponent;
     private Car myCar;
@@ -26,13 +21,11 @@ public class Bot {
     private final static Command BOOST = new BoostCommand();
     private final static Command EMP = new EmpCommand();
     private final static Command FIX = new FixCommand();
-
-
     private final static Command TURN_RIGHT = new ChangeLaneCommand(1);
     private final static Command TURN_LEFT = new ChangeLaneCommand(-1);
 
+    /* Konstruktor */
     public Bot(GameState gameState) {
-        this.random = new SecureRandom();
         directionList.add(TURN_RIGHT);
         directionList.add(TURN_LEFT);
         this.gameState = gameState;
@@ -41,29 +34,21 @@ public class Bot {
         this.opponent = gameState.opponent;
     }
 
-    /* public Bot(Random random, GameState gameState) {
-        this.random = random;
-        this.gameState = gameState;
-        this.myCar = gameState.player;
-        this.opponent = gameState.opponent;
-
-        directionList.add(-1);
-        directionList.add(1);
-    } */
-
+    /* Fungsi run yang dijalankan tiap ronde */
     public Command run() {
         int currentSpeed = myCar.speed;
 
-        List<Object> blocks = getBlocksInFront(myCar.position.lane, myCar.position.block, gameState); // beberapa blok ke depan
-        List<Object> nextBlocks = blocks.subList(0,1); // mendapatkan satu blok ke depan (masih dalam bentuk list
+        List<Object> blocks = getBlocksInFront(myCar.position.lane, myCar.position.block, gameState);
+        // list of block yang dapat dilihat (20 block pada map terlepas dari finish lane, dsb)
 
-        // Fix first if too damaged to mov
+        // Mobil akan diperbaiki terlebih dahulu jika damagenya lebih besar dari 3
         if(myCar.damage >= 3) {
             return FIX;
         }
 
-        int nearestObstacle = getNearestObstacle(blocks);
+        int nearestObstacle = getNearestObstacle(blocks); // lokasi obstacle terdekat pada lane mobil berjalan
 
+        // pakai boost jika tidak ada obstacle yg menghalangi di depannya
         if (hasPowerUp(PowerUps.BOOST, myCar.powerups) && (nearestObstacle > 15 || nearestObstacle == 0)) {
             if (myCar.damage != 0){
                 return FIX;
@@ -94,20 +79,17 @@ public class Bot {
                 }
         }
 
-
         // Belok hanya untuk menghindari obstacle, selebihnya mengikuti current lane
 
         // Menghindari obstacle
         if (getNearestObstacle(blocks) != 0) {
-            Object landingBlock;
-            //List<Object> landingBlock = blocks.subList(myCar.position.block + currentSpeed, myCar.position.block + currentSpeed + 1);
+            Object landingBlock; // block tempat mendarat setelah memakai lizard
             if(currentSpeed < blocks.size()){
                 landingBlock = blocks.get(currentSpeed);
             } else {
                 landingBlock = Terrain.EMPTY;
             }
 
-            //boolean landingInObstacle = landingBlock.contains(Terrain.MUD) || landingBlock.contains(Terrain.WALL) || landingBlock.contains(Terrain.TWEET);
             boolean landingInObstacle = landingBlock == Terrain.MUD || landingBlock == Terrain.WALL;
 
             if (hasPowerUp(PowerUps.LIZARD, myCar.powerups) && !landingInObstacle) {
@@ -115,23 +97,29 @@ public class Bot {
                 return LIZARD;
             }
 
+            /* Pada percabangan di bawah ini, variabel blocksInleftSideLane dan blocksInRightLane
+               dideklarasikan lebih dari sekali agar tidak terjadi out of bounds saat pengaksesan elemen
+             */
+
             if (currentSpeed >= getNearestObstacle(blocks)) { // jika akan menabrak obstacle
                 if (myCar.position.lane == 4) {
-                    // blok di kiri current lane
+                    // blok di kiri lane saat ini
                     List<Object> blocksInLeftSideLane = getBlocksInFront(myCar.position.lane - 1, myCar.position.block, gameState);
 
+                    // jika obstacle di lane saat ini lebih jauh daripada obstacle di lane kirinya
                     if (getNearestObstacle(blocks) >= getNearestObstacle(blocksInLeftSideLane) && (getNearestObstacle(blocksInLeftSideLane) != 0)){
                         return ACCELERATE;
                     }
-                    return TURN_LEFT; // belok kiri jika mobil di lane paling kanan
+                    return TURN_LEFT;
                 } else if (myCar.position.lane == 1) {
-                    // blok di kanan current lane
+                    // blok di kanan lane saat ini
                     List<Object> blocksInRightSideLane = getBlocksInFront(myCar.position.lane + 1, myCar.position.block, gameState);
 
+                    // jika obstacle di lane saat ini lebih jauh daripada obstacle di lane kanannya
                     if (getNearestObstacle(blocks) >= getNearestObstacle(blocksInRightSideLane) && (getNearestObstacle(blocksInRightSideLane) != 0)){
                         return ACCELERATE;
                     }
-                    return TURN_RIGHT; // belok kanan jika mobil di lane paling kiri
+                    return TURN_RIGHT;
                 } else { // jika di 2 lane tengah (lane 2 dan 3)
                     // blok di kanan current lane
                     List<Object> blocksInRightSideLane = getBlocksInFront(myCar.position.lane + 1, myCar.position.block, gameState);
@@ -146,9 +134,9 @@ public class Bot {
                     // cek obstacle terdekat di lane kanan
                     int right = getNearestObstacle(blocksInRightSideLane);
 
-                    if (right == 0) {
+                    if (right == 0) { // tidak ada obstacle di lane kanan
                         return TURN_RIGHT;
-                    } else if (left == 0) {
+                    } else if (left == 0) { // tidak ada obstavle di lane kiri
                         return TURN_LEFT;
                     } else if (left <= right) { // obstacle di lane kanan lebih jauh
                         return TURN_RIGHT;
@@ -189,6 +177,10 @@ public class Bot {
         return ACCELERATE;
     }
 
+    /* Menerima masukan list of blocks dan mengembalikan indeks
+       list tempat obstacle pertama kali ditemukan yang mengindikasikan obstacle terdekat
+     */
+
     private int getNearestObstacle(List<Object> blocks) {
         int i = 0;
         boolean found = false;
@@ -227,6 +219,9 @@ public class Bot {
         return blocks;
     }
 
+    /* Menerima masukan powerup dan list of powerup yang tersedia,
+       mengembalikan true jika powerup tersedia, false jika tidak
+     */
     private Boolean hasPowerUp(PowerUps powerUpToCheck, PowerUps[] available) {
         for (PowerUps powerUp: available) {
             if (powerUp.equals(powerUpToCheck)) {
@@ -234,25 +229,5 @@ public class Bot {
             }
         }
         return false;
-    }
-
-    private int cyberTruckInLane() {
-        // cek cyber truck ada pada lane berapa
-        int i = 0;
-        boolean found = false;
-        List<Lane[]> map = gameState.lanes;
-        Lane[] laneList = map.get(myCar.position.lane - 1);
-        while (i < map.size() && !found){
-            if (laneList[i].isOccupiedByCyberTruck == true) {
-                found = true;
-            } else {
-                i ++;
-            }
-        }
-        if (found) {
-            return i;
-        } else { // jika tidak ditemukan, return -1
-            return -1;
-        }
     }
 }
